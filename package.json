@@ -1,0 +1,27 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "The Odin Project - Todo List project implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sedvik/todo-list.git"
+  },
+  "author": "Skyler Edvik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sedvik/todo-list/issues"
+  },
+  "homepage": "https://github.com/sedvik/todo-list#readme",
+  "devDependencies": {
+    "css-loader": "^6.3.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
+  }
+}
