@@ -1,9 +1,6 @@
-import { todo } from './todo.js';
-
 // project prototype
 const projectProto = {
-    addTodo: function(title, description, dueDate, priority) {
-        const newTodo = todo(title, description, dueDate, priority);
+    addTodo: function(newTodo) {
         this.todos.push(newTodo);
     },
     deleteTodo: function(todoTitle) {

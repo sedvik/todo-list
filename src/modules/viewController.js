@@ -1,0 +1,19 @@
+import { pubSub } from './pubSub.js';
+
+// viewController module - controls DOM manipulation
+const viewController = (function() {
+    // initialize function - Subscribes to pubSub events
+    function initialize() {
+        const pageLoad = function(data) {
+            console.log('Hello from viewController.js!')
+            console.log(data);
+        }
+        pubSub.subscribe('initialize', pageLoad);
+    }
+    
+    return {
+        initialize
+    };
+})();
+
+export { viewController };
