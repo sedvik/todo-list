@@ -12,7 +12,7 @@ const todoProto = {
     changePriority: function(newPriority) {
         this.priority = newPriority;
     }
-}
+};
 
 // todo factory function
 function todo(title, description, dueDate, priority) {
