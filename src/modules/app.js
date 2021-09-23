@@ -76,7 +76,7 @@ const app = (function() {
     }
 
     // initialize function - initializes the application with the given projects array from localStorage
-    function initialize(projects) {
+    function init(projects) {
         // Convert localStorage projects array to objects with prototype methods using factory functions
         projects.forEach(projectObj => {
             // Create a new project
@@ -107,7 +107,7 @@ const app = (function() {
         deleteProject,
         addTodo,
         deleteTodo,
-        initialize
+        init
     };
 })();
 

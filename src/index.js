@@ -1,4 +1,6 @@
 import { viewController } from './modules/viewController.js';
+import { events } from './modules/events.js';
+import { storage } from './modules/storage.js';
 import { app } from './modules/app.js';
 
 // TEMPORARY projects array that will stand in for localStorage to rehydrate into appropriate objects with prototypes
@@ -34,8 +36,9 @@ const projects = [
 ];
 
 // Initialize viewController, events, and storage modules
-viewController.initialize();
-events.initialize();
-storage.initialize();
+viewController.init();
+events.init();
+storage.init();
 
-app.initialize(projects);
+// Initialize application
+app.init(projects);

@@ -1,0 +1,332 @@
+/* General Styles */
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color:rgb(247, 243, 215)
+}
+
+/* Header */
+header {
+    margin-left: 240px;
+    background-color: rgb(250, 236, 198);
+    box-sizing: border-box;
+    border-bottom: 2px solid #222;
+    height: 80px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+    line-height: 80px;
+    vertical-align: center;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* project side-bar */
+#project-bar {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+#project-bar h2 {
+    color: #eee;
+    text-align: center;
+    margin-bottom: 0.8rem;
+}
+
+#add-project {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1.2rem 0;
+}
+
+#add-project input {
+    display: block;
+    box-sizing: border-box;
+    height: 30px;
+    width: 60%;
+    padding: 0px;
+    margin-right: 0.3rem;
+}
+
+#add-project button {
+    cursor: pointer;
+    height: 30px;
+    font-size: 1.4rem;
+}
+
+.project {
+    padding: 6px 8px 6px 16px;
+    font-size: 1.5rem;
+    color: #818181;
+}
+
+.active-project {
+    background-color: #333;
+    color: #bbb;
+    font-weight: bold;
+}
+
+.project:hover {
+    cursor: pointer;
+    color: #f1f1f1;
+}
+
+.active-project:hover {
+    cursor: default;
+    color: #bbb;
+}
+
+/* main */
+main {
+    margin-left: 240px;
+    padding: 0px 10px;
+}
+
+main h2 {
+    margin: 0.8rem;
+    text-align: center;
+}
+
+/* Add todo item form */
+#add-todo-btn {
+    cursor: pointer;
+    display: block;
+    margin: 1rem auto;
+    height: 30px;
+}
+
+.add-todo {
+    width: 400px;
+    height: 420px;
+    background-color: rgb(245, 233, 201);
+    border: 2px solid #333;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+#close-new-todo-form {
+    cursor: pointer;
+    background-color: rgb(228, 35, 35);
+    height: 30px;
+    width: 30px;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    float: right;
+    margin: 0;
+}
+
+.add-todo h3 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    clear: right;
+}
+
+.add-todo label,
+.add-todo input,
+.add-todo textarea,
+.add-todo p,
+#submit-todo-btn {
+    margin-top: 0.7rem;
+}
+
+.add-todo input[type="text"] {
+    width: 80%;
+}
+
+.add-todo label, 
+#submit-todo-btn {
+    display: block;
+}
+
+.add-todo label,
+.add-todo p {
+    font-weight: bold;
+}
+
+.add-todo textarea {
+    resize: none;
+    width: 80%;
+    height: 100px;
+}
+
+#submit-todo-btn {
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    font-weight: bold;
+    height: 30px;
+    width: 20%;
+}
+
+.add-todo .radio-label {
+    display: inline-block;
+    font-weight: 400;
+}
+
+/* Todo list */
+#todo-list > h3 {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#todo-list-items {
+    width: 80%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap : wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.inactive-todo {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+}
+
+.inactive-todo,
+.active-todo {
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    background-color: rgb(245, 233, 201);
+}
+
+.inactive-todo:hover {
+    background-color: rgb(247, 230, 185);
+}
+
+.inactive-todo > h4 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.active-todo {
+    cursor: default;
+    width: 400px;
+    height: 400px;
+    text-align: center;
+}
+
+.active-todo label {
+    display: block;
+    clear: right;
+}
+
+.inactive-todo.complete {
+    text-decoration: line-through;
+}
+
+.low-priority {
+    border: 2px solid rgb(47, 226, 137);
+}
+
+.mid-priority {
+    border: 2px solid rgb(204, 204, 21);
+}
+
+.high-priority {
+    border: 2px solid red;
+}
+
+#mark-complete,
+#del-active-todo {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    float: right;
+}
+
+#mark-complete {
+    float: left;
+    background-color: #eee;
+    color: #eee;
+}
+
+#del-active-todo {
+    float: right;
+    background-color: rgb(228, 35, 35);
+}
+
+.complete #mark-complete {
+    background-color: rgb(24, 153, 88);
+}
+
+.active-todo label,
+.active-todo input,
+.active-todo textarea,
+.active-todo p,
+#save-btn {
+    margin-top: 0.8rem;
+}
+
+.active-todo input[type="text"] {
+    width: 80%;
+}
+
+.active-todo label,
+.active-todo p {
+    font-weight: bold;
+}
+
+.active-todo textarea {
+    resize: none;
+    width: 80%;
+    height: 100px;
+}
+
+#save-btn {
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    font-weight: bold;
+    height: 30px;
+    width: 20%;
+}
+
+.active-todo .radio-label {
+    display: inline-block;
+    font-weight: 400;
+}

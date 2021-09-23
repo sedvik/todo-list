@@ -3,7 +3,7 @@ import { pubSub } from './pubSub.js';
 // viewController module - controls DOM manipulation
 const viewController = (function() {
     // initialize function - Subscribes to pubSub events
-    function initialize() {
+    function init() {
         const pageLoad = function(data) {
             console.log('Hello from viewController.js!')
             console.log(data);
@@ -12,7 +12,7 @@ const viewController = (function() {
     }
     
     return {
-        initialize
+        init
     };
 })();
 
