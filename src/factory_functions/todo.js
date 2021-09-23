@@ -11,6 +11,15 @@ const todoProto = {
     },
     changePriority: function(newPriority) {
         this.priority = newPriority;
+    },
+    toggleComplete: function() {
+        return !this.complete;
+    },
+    update: function(newTitle, newDescription, newDueDate, newPriority) {
+        this.changeTitle(newTitle);
+        this.changeDescription(newDescription);
+        this.changeDueDate(newDueDate);
+        this.changePriority(newPriority);
     }
 };
 
@@ -20,7 +29,8 @@ function todo(title, description, dueDate, priority) {
         title,
         description,
         dueDate,
-        priority
+        priority,
+        complete: false
     });
 }
 

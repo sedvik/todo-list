@@ -11,7 +11,8 @@ const app = (function() {
     function _getStateData() {
         return {
             projects: _projects,
-            activeProject: _activeProject
+            activeProject: _activeProject,
+            activeTodo: _activeTodo
         };
     }
 
@@ -70,6 +71,12 @@ const app = (function() {
         _activeProject.addTodo(todoItem);
     }
 
+    // changeTodo function - modifies active todo item of activeproject to specified parameters
+    function changeTodo(newTitle, newDescription, newDueDate, newPriority) {
+        const activeTodo = _activeProject.activeTodo;
+        activeTodo.update(newTitle, newDescription, newDueDate, newPriority);
+    }
+
     // deleteTodo function - deletes a todo item from the activeProject
     function deleteTodo(title) {
         _activeProject.deleteTodo(title);
@@ -106,6 +113,7 @@ const app = (function() {
         addProject,
         deleteProject,
         addTodo,
+        changeTodo,
         deleteTodo,
         init
     };
