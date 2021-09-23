@@ -2,7 +2,7 @@ import { pubSub } from './pubSub.js';
 
 // viewController module - controls DOM manipulation
 const viewController = (function() {
-    // initialize function - Subscribes to pubSub events
+    // init function - Subscribes to pubSub events
     function init() {
         const pageLoad = function(data) {
             console.log('Hello from viewController.js!')

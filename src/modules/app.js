@@ -82,7 +82,7 @@ const app = (function() {
         _activeProject.deleteTodo(title);
     }
 
-    // initialize function - initializes the application with the given projects array from localStorage
+    // init function - initializes the application with the given projects array from localStorage
     function init(projects) {
         // Convert localStorage projects array to objects with prototype methods using factory functions
         projects.forEach(projectObj => {
