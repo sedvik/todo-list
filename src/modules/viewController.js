@@ -1,3 +1,7 @@
+import { createSidebarContent } from '../views/sidebar.js';
+import { createProjectTitleContent } from '../views/title.js';
+import { createNewTodoContent } from '../views/newTodoSection.js';
+import { createTodoItemContent } from '../views/todoItems.js';
 import { pubSub } from './pubSub.js';
 
 // viewController module - controls DOM manipulation
@@ -26,8 +30,16 @@ const viewController = (function() {
         const projectListDiv = document.querySelector('#project-list')
         projectListDiv.textContent = '';
 
+        // Extract relevant data
+        const projectNameList = data.projects.map(project => {
+            return project.name;
+        });
+
+        const activeProjectName = data.activeProject.name;
+
         // Generate project-list sidebar html
-        const sidebarContent = '';
+        const sidebarContent = createSidebarContent(projectNameList, activeProjectName);
+        projectListDiv.appendChild(sidebarContent);
         
         pubSub.publish('projectsRender');
     }
@@ -40,8 +52,11 @@ const viewController = (function() {
         const projectTitleDiv = document.querySelector('#project-title-content');
         projectTitleDiv.textContent = '';
 
+        // Extract relevant data
+
         // Generate project-title html
-        const projectTitleContent = '';
+        const projectTitleContent = createProjectTitleContent();
+        //projectTitleDiv.appendChild(projectTitleContent);
         
         pubSub.publish('projectTitleRender');
     }
@@ -49,6 +64,17 @@ const viewController = (function() {
     // _renderNewTodoContent function - renders page content related to adding new todo
     function _renderNewTodoContent(data) {
         console.log(data);
+
+        // Clear new-todo-content div
+        const newTodoContentDiv = document.querySelector('#new-todo-content');
+        newTodoContentDiv.textContent = '';
+
+        // Extract relevant data
+
+        // Generate new-todo-content html
+        const newTodoContent = createNewTodoContent();
+        //newTodoContentDiv.appendChild(newTodoContent);
+
         
         pubSub.publish('newTodoContentRender');
     }
@@ -56,6 +82,17 @@ const viewController = (function() {
     // _renderTodos function - renders todo content
     function _renderTodos(data) {
         console.log(data);
+
+        // Clear todo-list-items div
+        const todoListItemsDiv = document.querySelector('#todo-list-items');
+        todoListItemsDiv.textContent = '';
+        console.log('yes');
+
+        // Extract relevant data
+
+        // Generate todo-list-items content
+        const todoListItemsContent = createTodoItemContent();
+        //todoListItemsDiv.appendChild(todoListItemsContent);
         
         pubSub.publish('todosRender');
     }
