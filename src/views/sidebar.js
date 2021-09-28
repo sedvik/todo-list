@@ -2,7 +2,7 @@ import { domUtil } from './util.js';
 
 function createProjectDiv(projectName, isActiveProject) {
     // Parent
-    const projectDivClassList = isActiveProject ? [ 'project' ] : [ 'project', 'active-project' ];
+    const projectDivClassList = isActiveProject ? [ 'project', 'active-project' ] :  [ 'project' ];
     const projectDiv = domUtil.create('div', '', {
         class: projectDivClassList,
         attributes: {

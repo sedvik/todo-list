@@ -36,6 +36,7 @@ const viewController = (function() {
         });
 
         const activeProjectName = data.activeProject.name;
+        console.log(activeProjectName);
 
         // Generate project-list sidebar html
         const sidebarContent = createSidebarContent(projectNameList, activeProjectName);
@@ -53,10 +54,12 @@ const viewController = (function() {
         projectTitleDiv.textContent = '';
 
         // Extract relevant data
+        const activeProjectName = data.activeProject.name;
+        console.log(activeProjectName);
 
         // Generate project-title html
-        const projectTitleContent = createProjectTitleContent();
-        //projectTitleDiv.appendChild(projectTitleContent);
+        const projectTitleContent = createProjectTitleContent(activeProjectName);
+        projectTitleDiv.appendChild(projectTitleContent);
         
         pubSub.publish('projectTitleRender');
     }
