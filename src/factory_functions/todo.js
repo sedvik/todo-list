@@ -13,7 +13,7 @@ const todoProto = {
         this.priority = newPriority;
     },
     toggleComplete: function() {
-        return !this.complete;
+        this.complete = !this.complete;
     },
     update: function(newTitle, newDescription, newDueDate, newPriority) {
         this.changeTitle(newTitle);
