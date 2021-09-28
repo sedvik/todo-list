@@ -133,18 +133,27 @@ const events = (function() {
     // _assignToggleTodoCompleteEvent function - Adds event handler to button for toggling todo completion
     function _assignToggleTodoCompleteEvent() {
         const toggleCompleteBtn = document.querySelector('#toggle-complete');
+        if (toggleCompleteBtn === null) {
+            return;
+        }
         toggleCompleteBtn.addEventListener('click', _toggleTodoComplete);
     }
 
     // _assignDeleteActiveTodoEvent function - Adds event handler to button that deletes the active todo
     function _assignDeleteActiveTodoEvent() {
         const delTodoBtn = document.querySelector('#del-active-todo');
+        if (delTodoBtn === null) {
+            return;
+        }
         delTodoBtn.addEventListener('click', _deleteActiveTodo);
     }
 
     // _assignUpdateActiveTodoEvent function - Adds event handler to save button that updates active todo information
     function _assignUpdateActiveTodoEvent() {
         const saveBtn = document.querySelector('#save-btn');
+        if (saveBtn === null) {
+            return;
+        }
         saveBtn.addEventListener('click', _updateActiveTodo);
     }
 

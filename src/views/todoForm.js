@@ -124,9 +124,6 @@ const todoForm = (function() {
         return container;
     }
 
-
-
-
     return {
         createTitleSection,
         createDescriptionSection,
