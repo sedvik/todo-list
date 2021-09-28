@@ -75,16 +75,40 @@ h4 {
     margin-right: 0.3rem;
 }
 
-#add-project button {
+#add-project-btn {
     cursor: pointer;
     height: 30px;
     font-size: 1.4rem;
 }
 
 .project {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 6px 8px 6px 16px;
     font-size: 1.5rem;
     color: #818181;
+}
+
+.project-name {
+    max-width: 180px;
+}
+
+.del-project {
+    background: none;
+    color: #818181;
+    border: none;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 0.2rem;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
+.del-project:hover {
+    cursor: pointer;
+    color: #f1f1f1;
 }
 
 .active-project {
@@ -93,7 +117,7 @@ h4 {
     font-weight: bold;
 }
 
-.project:hover {
+.project-name:hover {
     cursor: pointer;
     color: #f1f1f1;
 }
@@ -131,6 +155,7 @@ main h2 {
     margin: 0 auto;
     padding: 1rem;
     text-align: center;
+    display: none;
 }
 
 #close-new-todo-form {
@@ -226,7 +251,7 @@ main h2 {
 .inactive-todo,
 .active-todo {
     padding: 1rem;
-    margin: 0.5rem;
+    margin: 1.5rem 0.5rem;
     border-radius: 5px;
     background-color: rgb(245, 233, 201);
 }
@@ -268,7 +293,7 @@ main h2 {
     border: 2px solid red;
 }
 
-#mark-complete,
+#toggle-complete,
 #del-active-todo {
     cursor: pointer;
     height: 30px;
@@ -279,7 +304,7 @@ main h2 {
     float: right;
 }
 
-#mark-complete {
+#toggle-complete {
     float: left;
     background-color: #eee;
     color: #eee;
@@ -290,7 +315,7 @@ main h2 {
     background-color: rgb(228, 35, 35);
 }
 
-.complete #mark-complete {
+.complete #toggle-complete {
     background-color: rgb(24, 153, 88);
 }
 

@@ -15,12 +15,19 @@ const projectProto = {
             this.todos.splice(index, 1);
         }
     },
+    deleteActiveTodo: function() {
+        const index = this.findIndexByTitle(this.activeTodo.title);
+        if (index !== -1) {
+            this.activeTodo = null;
+            this.todos.splice(index, 1);
+        }
+    },
     setActiveTodo: function(todoTitle) {
         // If setActiveTodo is called with no arguments, set activeTodo to null
         if (todoTitle === undefined) {
             this.activeTodo = null;
         }
-        
+
         const index = this.findIndexByTitle(todoTitle);
         if (index !== -1) {
             this.activeTodo = this.todos[index];

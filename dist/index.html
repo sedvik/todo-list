@@ -18,56 +18,72 @@
         <h2>Projects</h2>
         <div id="add-project">
             <input placeholder="New Project">
-            <button>+</button>
+            <button id="add-project-btn">+</button>
         </div>
         <div id="project-list">
-            <p class="project">Food</p>
-            <p class="project active-project">Guitar</p>
-            <p class="project">Programming</p>
-            <p class="project">Swimming</p>
+            <div class="project" data-name="Food">
+                <p class="project-name">Food</p>
+                <button class="del-project">-</p>
+            </div>
+            <div class="project active-project" data-name="Guitar">
+                <p class="project-name">Guitar</p>
+                <button class="del-project">-</p>
+            </div>
+            <div class="project" data-name="Programming">
+                <p class="project-name">Programming</p>
+                <button class="del-project">-</p>
+            </div>
+            <div class="project" data-name="Swimming">
+                <p class="project-name">Swimming is really super huh?</p>
+                <button class="del-project">-</p>
+            </div>
         </div>
     </div>
     <!-- Page Content -->
     <main>
-        <h2>Guitar</h2>
+        <div id="project-title-content">
+            <h2>Guitar</h2>
+        </div>
         <!-- Form for adding new todo item -->
-        <button id="add-todo-btn">Add Todo</button>
-        <div class="add-todo">
-            <button id="close-new-todo-form">X</button>
-            <h3>Add New Todo</h3>
-            <div>
-                <label for="new-title">Title</label>
-                <input id="new-title" name="new-title" type="text">
+        <div id="new-todo-content">
+            <button id="add-todo-btn">Add Todo</button>
+            <div class="add-todo">
+                <button id="close-new-todo-form">X</button>
+                <h3>Add New Todo</h3>
+                <div>
+                    <label for="new-title">Title</label>
+                    <input id="new-title" name="new-title" type="text">
+                </div>
+                <div>
+                    <label for="new-description">Description</label>
+                    <textarea id="new-description" name="new-description" rows="5" cols="30"></textarea>
+                </div>
+                <div>
+                    <label for="new-date">Due Date</label>
+                    <input id="new-date" name="new-date" type="date">
+                </div>
+                <div>
+                    <p>Priority</p>
+                    <input id="new-low" type="radio" name="new-priority" value="low">
+                    <label class="radio-label" for="new-low">Low</label>
+                    <input id="new-mid" type="radio" name="new-priority" value="mid">
+                    <label class="radio-label" for="new-mid">Mid</label>
+                    <input id="new-high" type="radio" name="new-priority" value="high">
+                    <label class="radio-label" for="new-high">High</label>
+                </div>
+                <button id="submit-todo-btn">Add</button>
             </div>
-            <div>
-                <label for="new-description">Description</label>
-                <textarea id="new-description" name="new-description" rows="5" cols="30"></textarea>
-            </div>
-            <div>
-                <label for="new-date">Due Date</label>
-                <input id="new-date" name="new-date" type="date">
-            </div>
-            <div>
-                <p>Priority</p>
-                <input id="new-low" type="radio" name="new-priority" value="low">
-                <label class="radio-label" for="new-low">Low</label>
-                <input id="new-mid" type="radio" name="new-priority" value="mid">
-                <label class="radio-label" for="new-mid">Mid</label>
-                <input id="new-high" type="radio" name="new-priority" value="high">
-                <label class="radio-label" for="new-high">High</label>
-            </div>
-            <button id="submit-todo-btn">Add</button>
         </div>
         <!-- Current todo items -->
         <div id="todo-list">
             <h3>Todo Items</h3>
             <div id="todo-list-items">
-                <div class="inactive-todo low-priority complete">
+                <div class="inactive-todo low-priority complete" data-title="Learn Freebird">
                     <h4>Learn Freebird</h4>
                     <p>Due: 12/23/21</p>
                 </div>
-                <div class="active-todo mid-priority complete">
-                    <button id="mark-complete">&check;</button>
+                <div class="active-todo mid-priority complete" data-title="Practice Cliffs of Dover">
+                    <button id="toggle-complete">&check;</button>
                     <button id="del-active-todo">X</button>
                     <div>
                         <label for="update-title">Title</label>
@@ -93,7 +109,7 @@
                     <button id="save-btn">Save</button>
 
                 </div>
-                <div class="inactive-todo high-priority">
+                <div class="inactive-todo high-priority" data-title="Learn WonderWall">
                     <h4>Learn Wonderwall</h4>
                     <p>Due: 12/11/21</p>
                 </div>

@@ -12,7 +12,6 @@ const app = (function() {
         return {
             projects: _projects,
             activeProject: _activeProject,
-            activeTodo: _activeTodo
         };
     }
 
@@ -46,12 +45,14 @@ const app = (function() {
     function changeActiveProject(projectName) {
         const project = _getProjectFromName(projectName);
         _activeProject = project;
+        pubSub.publish('activeProjectChange', _getStateData());
     }
 
     // addProject function - adds a new project to the _projects array
     function addProject(projectName) {
         const newProject = project(projectName);
         _projects.push(newProject);
+        pubSub.publish('projectsChange', _getStateData());
     }
 
     // deleteProject function - deletes the project with the specified name from _projects array
@@ -60,6 +61,7 @@ const app = (function() {
 
         // IMPLEMENT LOGIC THAT HANDLES WHEN THE DELETED PROJECT IS THE ACTIVE PROJECT
         _projects.splice(index, 1);
+        pubSub.publish('projectsChange', _getStateData());
     }
 
     // addTodo function - adds a todo item to the activeProject
@@ -69,17 +71,35 @@ const app = (function() {
 
         // Append todo item to activeProject todos array
         _activeProject.addTodo(todoItem);
+
+        pubSub.publish('todosChange', _getStateData());
     }
 
     // changeTodo function - modifies active todo item of activeproject to specified parameters
     function changeTodo(newTitle, newDescription, newDueDate, newPriority) {
         const activeTodo = _activeProject.activeTodo;
-        activeTodo.update(newTitle, newDescription, newDueDate, newPriority);
+        console.log(activeTodo);
+        activeTodo.update(newTitle, newDescription, newDueDate, newPriority); // CHECK THAT THIS IS WORKING IN THE FINAL APP VERSION, CURRENTLY THE ACTIVETODO IS SET TO NULL SINCE FORM WASN'T CLICKED BEFOREHAND
+        pubSub.publish('todosChange', _getStateData());
     }
 
-    // deleteTodo function - deletes a todo item from the activeProject
-    function deleteTodo(title) {
-        _activeProject.deleteTodo(title);
+    // changeActiveTodo function - changes the active todo item for the current project
+    function changeActiveTodo(todoTitle) {
+        const activeTodo = _activeProject.activeTodo;
+        activeTodo.setActiveTodo(todoTitle);
+        pubSub.publish('todosChange', _getStateData());
+    }
+
+    // deleteTodo function - deletes the active todo item from the activeProject
+    function deleteActiveTodo() {
+        _activeProject.deleteActiveTodo();
+        pubSub.publish('todosChange', _getStateData());
+    }
+
+    // toggleTodoComplete function - toggles the active todo items complete status
+    function toggleTodoComplete() {
+        _activeProject.activeTodo.toggleComplete();
+        pubSub.publish('todosChange', _getStateData());
     }
 
     // init function - initializes the application with the given projects array from localStorage
@@ -103,7 +123,7 @@ const app = (function() {
         _activeProject = _projects[0];
 
         // Publish 'initialize' event
-        pubSub.publish('initialize', _getStateData());
+        pubSub.publish('appInit', _getStateData());
     }
 
     return {
@@ -114,7 +134,9 @@ const app = (function() {
         deleteProject,
         addTodo,
         changeTodo,
-        deleteTodo,
+        changeActiveTodo,
+        deleteActiveTodo,
+        toggleTodoComplete,
         init
     };
 })();
