@@ -78,15 +78,13 @@ const app = (function() {
     // changeTodo function - modifies active todo item of activeproject to specified parameters
     function changeTodo(newTitle, newDescription, newDueDate, newPriority) {
         const activeTodo = _activeProject.activeTodo;
-        console.log(activeTodo);
         activeTodo.update(newTitle, newDescription, newDueDate, newPriority); // CHECK THAT THIS IS WORKING IN THE FINAL APP VERSION, CURRENTLY THE ACTIVETODO IS SET TO NULL SINCE FORM WASN'T CLICKED BEFOREHAND
         pubSub.publish('todosChange', _getStateData());
     }
 
     // changeActiveTodo function - changes the active todo item for the current project
     function changeActiveTodo(todoTitle) {
-        const activeTodo = _activeProject.activeTodo;
-        activeTodo.setActiveTodo(todoTitle);
+        _activeProject.setActiveTodo(todoTitle);
         pubSub.publish('todosChange', _getStateData());
     }
 

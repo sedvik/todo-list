@@ -11,13 +11,13 @@ const projects = [
             {
                 title: 'Eat some pizza',
                 description: 'Eat some pizza with garlic sauce',
-                dueDate: '12-10-22',
+                dueDate: '2012-10-22',
                 priority: 'high'
             },
             {
                 title: 'Eat some chicken wings',
-                description: 'Eat some pizza with garlic sauce',
-                dueDate: '18-03-14',
+                description: 'Eat some chicken wings with ranch',
+                dueDate: '2018-03-14',
                 priority: 'mid'
             }
         ]
@@ -28,7 +28,7 @@ const projects = [
             {
                 title: 'Practice Stairway to Heaven',
                 description: 'Practice the chorus of Stairway to Heaven',
-                dueDate: '21-05-18',
+                dueDate: '2021-05-18',
                 priority: 'low'
             }
         ]

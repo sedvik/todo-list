@@ -39,11 +39,10 @@ const todoForm = (function() {
                 for: id
             }
         });
-        const descriptionInput = domUtil.create('textarea', '', {
+        const descriptionInput = domUtil.create('textarea', initialValue, {
             id: id,
             attributes: {
                 name: id,
-                value: initialValue,
                 rows: '5',
                 cols: '30'
             }
@@ -71,9 +70,9 @@ const todoForm = (function() {
             attributes: {
                 name: id,
                 type: 'date',
-                value: initialValue
             }
         });
+        dateInput.value = initialValue;
         const children = [ dateLabel, dateInput ];
     
         // Append children to parent
