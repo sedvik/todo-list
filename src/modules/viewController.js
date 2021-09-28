@@ -36,7 +36,6 @@ const viewController = (function() {
         });
 
         const activeProjectName = data.activeProject.name;
-        console.log(activeProjectName);
 
         // Generate project-list sidebar html
         const sidebarContent = createSidebarContent(projectNameList, activeProjectName);
@@ -55,7 +54,6 @@ const viewController = (function() {
 
         // Extract relevant data
         const activeProjectName = data.activeProject.name;
-        console.log(activeProjectName);
 
         // Generate project-title html
         const projectTitleContent = createProjectTitleContent(activeProjectName);
@@ -65,19 +63,14 @@ const viewController = (function() {
     }
 
     // _renderNewTodoContent function - renders page content related to adding new todo
-    function _renderNewTodoContent(data) {
-        console.log(data);
-
+    function _renderNewTodoContent() {
         // Clear new-todo-content div
         const newTodoContentDiv = document.querySelector('#new-todo-content');
         newTodoContentDiv.textContent = '';
 
-        // Extract relevant data
-
         // Generate new-todo-content html
         const newTodoContent = createNewTodoContent();
-        //newTodoContentDiv.appendChild(newTodoContent);
-
+        newTodoContentDiv.appendChild(newTodoContent);
         
         pubSub.publish('newTodoContentRender');
     }
@@ -89,7 +82,6 @@ const viewController = (function() {
         // Clear todo-list-items div
         const todoListItemsDiv = document.querySelector('#todo-list-items');
         todoListItemsDiv.textContent = '';
-        console.log('yes');
 
         // Extract relevant data
 
@@ -104,7 +96,7 @@ const viewController = (function() {
     function _renderFullPage(data) {
         _renderProjects(data);
         _renderProjectTitle(data);
-        _renderNewTodoContent(data);
+        _renderNewTodoContent();
         _renderTodos(data);
     }
     
