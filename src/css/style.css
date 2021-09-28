@@ -219,7 +219,7 @@ main h2 {
 }
 
 /* Todo list */
-#todo-list > h3 {
+#todo-list h3 {
     text-align: center;
     margin-top: 1rem;
 }

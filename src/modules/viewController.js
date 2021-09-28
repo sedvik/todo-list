@@ -1,7 +1,7 @@
 import { createSidebarContent } from '../views/sidebar.js';
 import { createProjectTitleContent } from '../views/title.js';
 import { createNewTodoContent } from '../views/newTodoSection.js';
-import { createTodoItemContent } from '../views/todoItems.js';
+import { createTodoListContent } from '../views/todoItems.js';
 import { pubSub } from './pubSub.js';
 
 // viewController module - controls DOM manipulation
@@ -24,8 +24,6 @@ const viewController = (function() {
     
     // _renderProjects function - renders sidebar content
     function _renderProjects(data) {
-        console.log(data);
-
         // Clear the project-list sidebar
         const projectListDiv = document.querySelector('#project-list')
         projectListDiv.textContent = '';
@@ -46,8 +44,6 @@ const viewController = (function() {
 
     // _renderProjectTitle function - renders the project title on the page
     function _renderProjectTitle(data) {
-        console.log(data);
-
         // Clear project-title-content
         const projectTitleDiv = document.querySelector('#project-title-content');
         projectTitleDiv.textContent = '';
@@ -77,17 +73,17 @@ const viewController = (function() {
 
     // _renderTodos function - renders todo content
     function _renderTodos(data) {
-        console.log(data);
-
         // Clear todo-list-items div
-        const todoListItemsDiv = document.querySelector('#todo-list-items');
-        todoListItemsDiv.textContent = '';
+        const todoListDiv = document.querySelector('#todo-list');
+        todoListDiv.textContent = '';
 
         // Extract relevant data
+        const todos = data.activeProject.todos;
+        const activeTodo = data.activeProject.activeTodo;
 
         // Generate todo-list-items content
-        const todoListItemsContent = createTodoItemContent();
-        //todoListItemsDiv.appendChild(todoListItemsContent);
+        const todoListContent = createTodoListContent(todos, activeTodo);
+        todoListDiv.appendChild(todoListContent);
         
         pubSub.publish('todosRender');
     }

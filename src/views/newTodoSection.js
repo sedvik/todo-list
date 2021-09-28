@@ -1,4 +1,5 @@
 import { domUtil } from './util.js';
+import { todoForm } from './todoForm';
 
 function createTitleSection() {
     // Parent
@@ -148,10 +149,14 @@ function createAddTodoFormDiv() {
     // Children
     const closeTodoFormBtn = domUtil.create('button', 'X', { id: 'close-new-todo-form' });
     const h3 = domUtil.create('h3', 'Add New Todo');
-    const titleSection = createTitleSection();
-    const descriptionSection = createDescriptionSection();
-    const dateSection = createDateSection();
-    const prioritySection = createPrioritySection();
+    const titleSection = todoForm.createTitleSection('new-title')
+    const descriptionSection = todoForm.createDescriptionSection('new-description');
+    const dateSection = todoForm.createDateSection('new-date');
+    const prioritySection = todoForm.createPrioritySection([ 'new-low', 'new-mid', 'new-high' ],
+        [ 'low', 'mid', 'high' ],
+        [ 'Low', 'Mid', 'High' ],
+        'new-priority'    
+    );
     const submitTodoBtn = domUtil.create('button', 'Add', { id: 'submit-todo-btn' });
     const children = [ 
         closeTodoFormBtn,
