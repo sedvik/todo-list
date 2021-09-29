@@ -35,6 +35,7 @@ const projects = [
     }
 ];
 
+
 // Initialize viewController, events, and storage modules
 viewController.init();
 events.init();

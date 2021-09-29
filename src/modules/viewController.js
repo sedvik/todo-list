@@ -111,6 +111,7 @@ const viewController = (function() {
         pubSub.subscribe('activeProjectChange', _renderFullPage);
         pubSub.subscribe('invalidTodoFields', _showAlert);
         pubSub.subscribe('invalidProjectName', _showAlert);
+        pubSub.subscribe('invalidProjectDeletion', _showAlert);
     }
     
     return { init };

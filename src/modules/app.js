@@ -114,6 +114,12 @@ const app = (function() {
     // deleteProject function - deletes the project with the specified name from _projects array
     function deleteProject(projectName) {
         const index = _getProjectIndexFromName(projectName);
+
+        // Return out if last project is attempted to be deleted
+        if (_projects.length === 1) {
+            pubSub.publish('invalidProjectDeletion', 'Projects list cannnot be empty');
+            return;
+        }
         
         // If the deleted project is the active project, set the active project to the first item in the projects list
         let activeProjectDeleted;
