@@ -22,6 +22,14 @@ const viewController = (function() {
         formToggleBtn.style.display = 'block';
     }
 
+    // _clearNewTodoForm function - Clears form values from "Add New Todo" form
+    function _clearNewTodoForm() {
+        document.querySelector('#new-title').value = '';
+        document.querySelector('#new-description').value = '';
+        document.querySelector('#new-date').value = '';
+        document.querySelector('input[name="new-priority"]:checked').checked = false;
+    }
+
     // _showAlert function - alerts the given alert message to the window
     function _showAlert(alertMessage) {
         window.alert(alertMessage);
@@ -109,6 +117,9 @@ const viewController = (function() {
         pubSub.subscribe('projectsChange', _renderProjects);
         pubSub.subscribe('todosChange', _renderTodos);
         pubSub.subscribe('activeProjectChange', _renderFullPage);
+        pubSub.subscribe('addTodo', _clearNewTodoForm);
+        
+        // Alert subscriptions
         pubSub.subscribe('invalidTodoFields', _showAlert);
         pubSub.subscribe('invalidProjectName', _showAlert);
         pubSub.subscribe('invalidProjectDeletion', _showAlert);

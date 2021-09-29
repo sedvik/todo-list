@@ -150,6 +150,7 @@ const app = (function() {
         // Append todo item to activeProject todos array
         _activeProject.addTodo(todoItem);
 
+        pubSub.publish('addTodo')
         pubSub.publish('todosChange', _getStateData());
     }
 
