@@ -24,13 +24,13 @@ const todoProto = {
 };
 
 // todo factory function
-function todo(title, description, dueDate, priority) {
+function todo(title, description, dueDate, priority, complete=false) {
     return Object.assign(Object.create(todoProto), {
         title,
         description,
         dueDate,
         priority,
-        complete: false
+        complete
     });
 }
 

@@ -26,7 +26,7 @@ const storage = (function() {
     // _save function - Saves provided data to local storage
     function _save(data) {
         const projectData = JSON.stringify(data.projects);
-        const storage = window['localStorage']
+        const storage = window['localStorage'];
         storage.setItem('projects', projectData);
     }
 

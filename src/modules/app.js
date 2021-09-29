@@ -193,7 +193,7 @@ const app = (function() {
 
             // Add each todo to the corresponding project
             projectObj.todos.forEach(item => {
-                const todoItem = todo(item.title, item.description, item.dueDate, item.priority);
+                const todoItem = todo(item.title, item.description, item.dueDate, item.priority, item.complete);
                 newProject.addTodo(todoItem);
             });
 
