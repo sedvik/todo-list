@@ -72,7 +72,6 @@ const domUtil = (function() {
         return parent;
     }
 
-    // Clear 
     return {
         create,
         appendChildren,

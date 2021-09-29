@@ -1,6 +1,5 @@
 import { pubSub } from './pubSub.js';
 import { app } from './app.js';
-import { viewController } from './viewController.js';
 
 // Events module - coordinates event addition/modification to dom nodes
 const events = (function() {
@@ -88,7 +87,6 @@ const events = (function() {
         const newPriority = document.querySelector('input[name="update-priority"]:checked').value;
 
     app.changeTodo(newTitle, newDescription, newDueDate, newPriority);
-
     }
 
     /* Event Setting functions - These functions apply event handlers to DOM elements */
@@ -192,7 +190,6 @@ const events = (function() {
     
     // init function - creates pubSub subscriptions
     function init() {
-        // pubSub.subscribe('fullPageRender', _assignFullPageEvents);
         // On projectsRender, assign event handlers to the projects sidebar
         pubSub.subscribe('projectsRender', _assignSidebarEvents);
 
@@ -201,7 +198,6 @@ const events = (function() {
 
         // On todosRender, assign associated page event handlers
         pubSub.subscribe('todosRender', _assignTodoListEvents);
-
         return;
     }
 
