@@ -31,6 +31,46 @@ const app = (function() {
         return index;
     }
 
+    // _isUniqueTodoTitle function - Returns true if todo has a valid unique name
+    function _isUniqueTodoTitle(title, isUpdate) {
+        const todoTitles = _activeProject.todos.map(todo => {
+            return todo.title;
+        });
+
+        if (todoTitles.includes(title)) {
+            // If this check is performed for a todo update, the title may be the same as the activeTodo of the active project
+            if (isUpdate) {
+                const activeTodoTitle = _activeProject.activeTodo.title;
+                if (activeTodoTitle === title) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // _isValidTodo function - validates the Add New Todo form values and updates to existing todos
+    function isValidTodo(title, description, dueDate, priority, isUpdate) {
+        // Title, description, dueDate, and priority fields must all be filled in
+        let alertMessage;
+        if (!_isUniqueTodoTitle(title, isUpdate)) {
+            alertMessage = 'Todo title must be unique';
+        } else if (title === undefined || title === '') {
+            alertMessage = 'Please enter a todo title';
+        } else if (description === undefined || description === '') {
+            alertMessage = 'Please enter a todo description';
+        } else if (dueDate === undefined || dueDate === '') {
+            alertMessage = 'Please enter a todo due date';
+        } else if (priority === null) {
+            alertMessage = 'Please select a todo priority';
+        } else {
+            return true;
+        }
+        pubSub.publish('invalidTodoFields', alertMessage);
+    }
+    
     // getProjects functions - returns an array of app projects
     function getProjects() {
         return _projects;
@@ -58,10 +98,22 @@ const app = (function() {
     // deleteProject function - deletes the project with the specified name from _projects array
     function deleteProject(projectName) {
         const index = _getProjectIndexFromName(projectName);
+        
+        // If the deleted project is the active project, set the active project to the first item in the projects list
+        let activeProjectDeleted;
+        if (_activeProject.name === projectName) {
+            activeProjectDeleted = true;
+        }
 
-        // IMPLEMENT LOGIC THAT HANDLES WHEN THE DELETED PROJECT IS THE ACTIVE PROJECT
         _projects.splice(index, 1);
-        pubSub.publish('projectsChange', _getStateData());
+
+        // Set a new active project if the active project was deleted
+        if (activeProjectDeleted) {
+            const newActiveProjectName = _projects[0].name;
+            changeActiveProject(newActiveProjectName);
+        } else {
+            pubSub.publish('projectsChange', _getStateData());
+        }
     }
 
     // addTodo function - adds a todo item to the activeProject
@@ -128,6 +180,7 @@ const app = (function() {
     }
 
     return {
+        isValidTodo,
         getProjects,
         getActiveProject,
         changeActiveProject,

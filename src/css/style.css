@@ -265,6 +265,11 @@ main h2 {
     margin-bottom: 1rem;
 }
 
+/* Remove pointer interactivity from .inactive-todo child elements to allow event handler to fire if child elements are clicked*/
+.inactive-todo * {
+    pointer-events: none;
+}
+
 .active-todo {
     cursor: default;
     width: 400px;

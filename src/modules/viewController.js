@@ -21,6 +21,11 @@ const viewController = (function() {
         form.style.display = 'none';
         formToggleBtn.style.display = 'block';
     }
+
+    // _showAlert function - alerts the given alert message to the window
+    function _showAlert(alertMessage) {
+        window.alert(alertMessage);
+    }
     
     // _renderProjects function - renders sidebar content
     function _renderProjects(data) {
@@ -104,6 +109,7 @@ const viewController = (function() {
         pubSub.subscribe('projectsChange', _renderProjects);
         pubSub.subscribe('todosChange', _renderTodos);
         pubSub.subscribe('activeProjectChange', _renderFullPage);
+        pubSub.subscribe('invalidTodoFields', _showAlert);
     }
     
     return { init };

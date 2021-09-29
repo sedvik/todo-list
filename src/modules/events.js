@@ -29,7 +29,9 @@ const events = (function() {
     // _deleteProject function - Deletes the selected project
     function _deleteProject(e) {
         const projectName = e.target.parentNode.getAttribute('data-name');
-        app.deleteProject(projectName);
+        if (window.confirm(`Are you sure you want to delete the ${projectName} project?`)) {
+            app.deleteProject(projectName);
+        }
     }
 
     // _showNewTodoForm function - Shows the new todo form and hides the "Add Todo" button
@@ -48,9 +50,17 @@ const events = (function() {
         const title = document.querySelector('#new-title').value;
         const description = document.querySelector('#new-description').value;
         const dueDate = document.querySelector('#new-date').value;
-        const priority = document.querySelector('input[name="new-priority"]:checked').value;
+        const priorityInput = document.querySelector('input[name="new-priority"]:checked');
+        let priority;
+        if (priorityInput) {
+            priority = priorityInput.value;
+        } else {
+            priority = null;
+        }
 
-        app.addTodo(title, description, dueDate, priority); 
+        if (app.isValidTodo(title, description, dueDate, priority, false)) {
+            app.addTodo(title, description, dueDate, priority); 
+        }
     }
 
     // _setActiveTodo function - Sets an inactive todo to active
@@ -66,7 +76,9 @@ const events = (function() {
 
     // _deleteActiveTodo function - Deletes the active todo
     function _deleteActiveTodo() {
-        app.deleteActiveTodo();
+        if(window.confirm('Do you want to delete this todo item?')) {
+            app.deleteActiveTodo();
+        }
     }
 
     // _updateActiveTodo function - Updates the active todo function with updated form values
@@ -77,7 +89,9 @@ const events = (function() {
         const newDueDate = document.querySelector('#update-date').value;
         const newPriority = document.querySelector('input[name="update-priority"]:checked').value;
 
-        app.changeTodo(newTitle, newDescription, newDueDate, newPriority);
+        if (app.isValidTodo(newTitle, newDescription, newDueDate, newPriority, true)) {
+            app.changeTodo(newTitle, newDescription, newDueDate, newPriority);
+        }
     }
 
     /* Event Setting functions - These functions apply event handlers to DOM elements */
