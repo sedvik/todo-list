@@ -110,6 +110,7 @@ const viewController = (function() {
         pubSub.subscribe('todosChange', _renderTodos);
         pubSub.subscribe('activeProjectChange', _renderFullPage);
         pubSub.subscribe('invalidTodoFields', _showAlert);
+        pubSub.subscribe('invalidProjectName', _showAlert);
     }
     
     return { init };

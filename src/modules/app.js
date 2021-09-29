@@ -31,6 +31,19 @@ const app = (function() {
         return index;
     }
 
+    // _isValidProjectName function - returns true if project has a unique name
+    function _isValidProjectName(name) {
+        const projectNames = _projects.map(project => {
+            return project.name;
+        });
+        if (projectNames.includes(name)) {
+            pubSub.publish('invalidProjectName', 'Please enter a unique project name');
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     // _isUniqueTodoTitle function - Returns true if todo has a valid unique name
     function _isUniqueTodoTitle(title, isUpdate) {
         const todoTitles = _activeProject.todos.map(todo => {
@@ -52,7 +65,7 @@ const app = (function() {
     }
 
     // _isValidTodo function - validates the Add New Todo form values and updates to existing todos
-    function isValidTodo(title, description, dueDate, priority, isUpdate) {
+    function _isValidTodo(title, description, dueDate, priority, isUpdate) {
         // Title, description, dueDate, and priority fields must all be filled in
         let alertMessage;
         if (!_isUniqueTodoTitle(title, isUpdate)) {
@@ -90,6 +103,9 @@ const app = (function() {
 
     // addProject function - adds a new project to the _projects array
     function addProject(projectName) {
+        if (!_isValidProjectName(projectName)) {
+            return;
+        }
         const newProject = project(projectName);
         _projects.push(newProject);
         pubSub.publish('projectsChange', _getStateData());
@@ -118,6 +134,10 @@ const app = (function() {
 
     // addTodo function - adds a todo item to the activeProject
     function addTodo(title, description, dueDate, priority) {
+        if (!_isValidTodo(title, description, dueDate, priority, false)) {
+            return;
+        }
+        
         // Create todo item
         const todoItem = todo(title, description, dueDate, priority);
 
@@ -129,6 +149,9 @@ const app = (function() {
 
     // changeTodo function - modifies active todo item of activeproject to specified parameters
     function changeTodo(newTitle, newDescription, newDueDate, newPriority) {
+        if (!_isValidTodo(newTitle, newDescription, newDueDate, newPriority, true)) {
+            return;
+        }
         const activeTodo = _activeProject.activeTodo;
         activeTodo.update(newTitle, newDescription, newDueDate, newPriority);
         // Reset the project active todo to null 
@@ -180,7 +203,6 @@ const app = (function() {
     }
 
     return {
-        isValidTodo,
         getProjects,
         getActiveProject,
         changeActiveProject,

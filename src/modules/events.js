@@ -58,9 +58,7 @@ const events = (function() {
             priority = null;
         }
 
-        if (app.isValidTodo(title, description, dueDate, priority, false)) {
-            app.addTodo(title, description, dueDate, priority); 
-        }
+        app.addTodo(title, description, dueDate, priority); 
     }
 
     // _setActiveTodo function - Sets an inactive todo to active
@@ -89,9 +87,8 @@ const events = (function() {
         const newDueDate = document.querySelector('#update-date').value;
         const newPriority = document.querySelector('input[name="update-priority"]:checked').value;
 
-        if (app.isValidTodo(newTitle, newDescription, newDueDate, newPriority, true)) {
-            app.changeTodo(newTitle, newDescription, newDueDate, newPriority);
-        }
+    app.changeTodo(newTitle, newDescription, newDueDate, newPriority);
+
     }
 
     /* Event Setting functions - These functions apply event handlers to DOM elements */
@@ -192,20 +189,6 @@ const events = (function() {
         _assignDeleteActiveTodoEvent();
         _assignUpdateActiveTodoEvent();
     }
-
-/*
-    // _assignMainEvents wrapper function - Add event handlers to the main page Todo list content
-    function _assignMainEvents() {
-        _assignNewTodoEvents();
-        _assignTodoListEvents();
-    }
-
-    // _assignFullPageEvents wrapper function - Adds event handlers to the entire page
-    function _assignFullPageEvents() {
-        _assignSidebarEvents();
-        _assignMainEvents();
-    }
-*/
     
     // init function - creates pubSub subscriptions
     function init() {
