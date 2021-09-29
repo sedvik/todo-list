@@ -17,20 +17,23 @@ header {
 }
 
 h1 {
+    font-family: 'Fredericka the Great', cursive;
     text-align: center;
     font-size: 4rem;
-    font-weight: bold;
+    font-weight: 400;
     line-height: 80px;
     vertical-align: center;
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-family: 'Amatic SC', cursive;
+    font-size: 3.5rem;
     font-weight: bold;
 }
 
 h3 {
-    font-size: 1.8rem;
+    font-family: 'Amatic SC', cursive;
+    font-size: 2.4rem;
     font-weight: bold;
 }
 
@@ -82,11 +85,12 @@ h4 {
 }
 
 .project {
+    font-family: 'Lato', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 6px 8px 6px 16px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #818181;
 }
 
@@ -142,7 +146,7 @@ main h2 {
 #add-todo-btn {
     cursor: pointer;
     display: block;
-    margin: 1rem auto;
+    margin: 2rem auto 1rem auto;
     height: 30px;
 }
 
@@ -221,7 +225,7 @@ main h2 {
 /* Todo list */
 #todo-list h3 {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 #todo-list-items {
@@ -262,11 +266,14 @@ main h2 {
 
 .inactive-todo > h4 {
     text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-/* Remove pointer interactivity from .inactive-todo child elements to allow event handler to fire if child elements are clicked*/
+
 .inactive-todo * {
+    /* Remove pointer interactivity from .inactive-todo child elements to allow event handler to fire if child elements are clicked*/
     pointer-events: none;
 }
 
