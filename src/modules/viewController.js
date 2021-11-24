@@ -1,3 +1,8 @@
+import { firebaseApp } from './firebase.js';
+import {
+    getAuth,
+    onAuthStateChanged
+} from '@firebase/auth'
 import { createSidebarContent } from '../views/sidebar.js';
 import { createProjectTitleContent } from '../views/title.js';
 import { createNewTodoContent } from '../views/newTodoSection.js';
@@ -6,6 +11,24 @@ import { pubSub } from './pubSub.js';
 
 // viewController module - controls DOM manipulation
 const viewController = (function() {
+    // Setup firebase authStateChange event listener to manipulate header based on auth state
+    onAuthStateChanged(getAuth(firebaseApp), user => {
+        const profileInfoDiv = document.querySelector('.profile-info');
+        const loginFormDiv = document.querySelector('.login-form');
+        
+        if (user !== null) {
+            // Populate email field, display profile info and hide login form
+            const emailField = document.getElementById('email');
+            emailField.innerText = user.displayName;
+            profileInfoDiv.style.display = 'flex';
+            loginFormDiv.style.display = 'none';
+        } else {
+            // Hide profile info and display login form
+            profileInfoDiv.style.display = 'none';
+            loginFormDiv.style.display = 'flex';
+        }
+    });
+    
     // _showNewTodoForm function - Makes the "Add New Todo" form visible
     function _showNewTodoForm() {
         const form = document.querySelector('.add-todo');

@@ -1,9 +1,45 @@
+// import { initializeApp, getApp } from '@firebase/app';
+import { firebaseApp } from './firebase.js';
+import { 
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut
+} from '@firebase/auth';
 import { todo } from '../factory_functions/todo.js';
 import { project } from '../factory_functions/project.js';
 import { pubSub } from './pubSub.js';
 
 // app module contains todo list application data and functionality
 const app = (function() {
+    /*
+     * Firebase Auth functionality
+     */
+    
+    // TODO: Potentially move this to viewController.js instead since the purpose of this is to control what is displayed in the Header
+    // onAuthStateChanged(getAuth(firebaseApp), user => {
+    // if (user !== null) {
+    //     console.log('Logged in');
+    // } else {
+    //     console.log('No user')
+    // }
+    // });
+
+    // Sign into application
+    async function signIn() {
+        let provider = new GoogleAuthProvider();
+        await signInWithPopup(getAuth(firebaseApp), provider);
+    }
+
+    // // Sign out of application
+    function signOutUser() {
+        signOut(getAuth(firebaseApp));
+    }
+
+    /*
+     * App project and todo functionality 
+     */
+    
     let _projects = [];
     let _activeProject;
 
@@ -210,6 +246,8 @@ const app = (function() {
     }
 
     return {
+        signIn,
+        signOutUser,
         getProjects,
         getActiveProject,
         changeActiveProject,

@@ -4,6 +4,16 @@ import { app } from './app.js';
 // Events module - coordinates event addition/modification to dom nodes
 const events = (function() {
     /* Event handler functions */
+    // _login function - Logs user into application
+    function _login() {
+
+    }
+
+    // _logout function - Logs user out of application
+    function _logout() {
+
+    }
+    
     // _createNewProject function - Creates a new project
     function _createNewProject() {
         // Extract new project name
@@ -90,6 +100,17 @@ const events = (function() {
     }
 
     /* Event Setting functions - These functions apply event handlers to DOM elements */
+    // _assignLoginEvent function - Adds event handler to the header login button
+    function _assignLoginEvent() {
+        const loginBtn = document.querySelector('#login-btn');
+        loginBtn.addEventListener('click', app.signIn);
+    }
+
+    // _assignLogoutEvent() - Adds event handler to the header logout button
+    function _assignLogoutEvent() {
+        const logoutBtn = document.querySelector('#logout-btn');
+        logoutBtn.addEventListener('click', app.signOutUser);
+    }
 
     // _assignNewProjectEvent function - Adds event handler to the sidebar New Project button
     function _assignNewProjectEvent() {
@@ -166,6 +187,12 @@ const events = (function() {
         saveBtn.addEventListener('click', _updateActiveTodo);
     }
 
+    // _assignHeaderEvents wrapper function - Add event handlers to the header
+    function _assignHeaderEvents () {
+        _assignLoginEvent();
+        _assignLogoutEvent();
+    }
+
     // _assignSidebarEvents wrapper function - Add event handlers to the Projects side bar
     function _assignSidebarEvents() {
         _assignNewProjectEvent();
@@ -190,6 +217,9 @@ const events = (function() {
     
     // init function - creates pubSub subscriptions
     function init() {
+        // Assign header events to static header
+        _assignHeaderEvents();
+        
         // On projectsRender, assign event handlers to the projects sidebar
         pubSub.subscribe('projectsRender', _assignSidebarEvents);
 
