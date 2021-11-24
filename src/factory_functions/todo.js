@@ -1,3 +1,5 @@
+import uniqid from 'uniqid';
+
 // todo prototype
 const todoProto = {
     changeTitle: function(newTitle) {
@@ -30,7 +32,8 @@ function todo(title, description, dueDate, priority, complete=false) {
         description,
         dueDate,
         priority,
-        complete
+        complete,
+        id: uniqid()
     });
 }
 

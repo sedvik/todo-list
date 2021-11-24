@@ -25,6 +25,7 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
-    "firebase": "^9.5.0"
+    "firebase": "^9.5.0",
+    "uniqid": "^5.4.0"
   }
 }

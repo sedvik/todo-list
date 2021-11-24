@@ -1,3 +1,5 @@
+import uniqid from 'uniqid';
+
 // project prototype
 const projectProto = {
     findIndexByTitle: function(todoTitle) {
@@ -42,7 +44,8 @@ function project(name) {
     return Object.assign(Object.create(projectProto), {
         name,
         activeTodo,
-        todos
+        todos,
+        id: uniqid()
     });
 }
 
