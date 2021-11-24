@@ -65,14 +65,18 @@ const viewController = (function() {
         projectListDiv.textContent = '';
 
         // Extract relevant data
-        const projectNameList = data.projects.map(project => {
-            return project.name;
+        const projectList = data.projects.map(project => {
+            // return project.name;
+            return {
+                name: project.name,
+                id: project.id
+            }
         });
 
-        const activeProjectName = data.activeProject.name;
+        const activeProjectId = data.activeProject.id;
 
         // Generate project-list sidebar html
-        const sidebarContent = createSidebarContent(projectNameList, activeProjectName);
+        const sidebarContent = createSidebarContent(projectList, activeProjectId);
         projectListDiv.appendChild(sidebarContent);
         
         pubSub.publish('projectsRender');

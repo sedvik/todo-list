@@ -1,12 +1,13 @@
 import { domUtil } from './util.js';
 
-function createProjectDiv(projectName, isActiveProject) {
+function createProjectDiv(projectName, projectId, isActiveProject) {
     // Parent
     const projectDivClassList = isActiveProject ? [ 'project', 'active-project' ] :  [ 'project' ];
     const projectDiv = domUtil.create('div', '', {
         class: projectDivClassList,
         attributes: {
-            'data-name': projectName
+            'data-name': projectName,
+            'data-id': projectId
         }
     });
 
@@ -21,15 +22,15 @@ function createProjectDiv(projectName, isActiveProject) {
     return projectDiv;
 }
 
-function createSidebarContent(projectNameList, activeProjectName) {
+function createSidebarContent(projectList, activeProjectId) {
     // parent
     const container = domUtil.create('div', '');
     
     // children
-    projectNameList.forEach(projectName => {
+    projectList.forEach(project => {
         // Append children to parent
-        const isActiveProject = projectName === activeProjectName;
-        const projectDiv = createProjectDiv(projectName, isActiveProject);
+        const isActiveProject = project.id === activeProjectId;
+        const projectDiv = createProjectDiv(project.name, project.id, isActiveProject);
         container.append(projectDiv);
     });
 

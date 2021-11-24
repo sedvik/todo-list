@@ -15,15 +15,6 @@ const app = (function() {
     /*
      * Firebase Auth functionality
      */
-    
-    // TODO: Potentially move this to viewController.js instead since the purpose of this is to control what is displayed in the Header
-    // onAuthStateChanged(getAuth(firebaseApp), user => {
-    // if (user !== null) {
-    //     console.log('Logged in');
-    // } else {
-    //     console.log('No user')
-    // }
-    // });
 
     // Sign into application
     async function signIn() {
@@ -59,6 +50,14 @@ const app = (function() {
         return project;
     }
 
+    // _getProjectFromId function - obtains the project object with a matching project id
+    function _getProjectFromId(projectId) {
+        const project = _projects.find(project => {
+            return project.id === projectId;
+        });
+        return project;
+    }
+
     // _getProjectIndexFromName - obtains the index of the project with the specified name within the _projects array
     function _getProjectIndexFromName(projectName) {
         const index = _projects.findIndex(project => {
@@ -67,46 +66,20 @@ const app = (function() {
         return index;
     }
 
-    // _isValidProjectName function - returns true if project has a unique name
-    function _isValidProjectName(name) {
-        const projectNames = _projects.map(project => {
-            return project.name;
+    // _getProjectIndexFromId - obtains the index of the project with the specified id within the _projects array
+    function _getProjectIndexFromId(projectId) {
+        const index = _projects.findIndex(project => {
+            return project.id === projectId;
         });
-        if (projectNames.includes(name)) {
-            pubSub.publish('invalidProjectName', 'Please enter a unique project name');
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    // _isUniqueTodoTitle function - Returns true if todo has a valid unique name
-    function _isUniqueTodoTitle(title, isUpdate) {
-        const todoTitles = _activeProject.todos.map(todo => {
-            return todo.title;
-        });
-
-        if (todoTitles.includes(title)) {
-            // If this check is performed for a todo update, the title may be the same as the activeTodo of the active project
-            if (isUpdate) {
-                const activeTodoTitle = _activeProject.activeTodo.title;
-                if (activeTodoTitle === title) {
-                    return true;
-                }
-            }
-            return false;
-        } else {
-            return true;
-        }
+        return index;
     }
 
     // _isValidTodo function - validates the Add New Todo form values and updates to existing todos
     function _isValidTodo(title, description, dueDate, priority, isUpdate) {
         // Title, description, dueDate, and priority fields must all be filled in
         let alertMessage;
-        if (!_isUniqueTodoTitle(title, isUpdate)) {
-            alertMessage = 'Todo title must be unique';
-        } else if (title === undefined || title === '') {
+
+        if (title === undefined || title === '') {
             alertMessage = 'Please enter a todo title';
         } else if (description === undefined || description === '') {
             alertMessage = 'Please enter a todo description';
@@ -131,25 +104,22 @@ const app = (function() {
     }
 
     // changeActiveProject function - changes the active application project
-    function changeActiveProject(projectName) {
-        const project = _getProjectFromName(projectName);
+    function changeActiveProject(projectId) {
+        const project = _getProjectFromId(projectId);
         _activeProject = project;
         pubSub.publish('activeProjectChange', _getStateData());
     }
 
     // addProject function - adds a new project to the _projects array
     function addProject(projectName) {
-        if (!_isValidProjectName(projectName)) {
-            return;
-        }
         const newProject = project(projectName);
         _projects.push(newProject);
         pubSub.publish('projectsChange', _getStateData());
     }
 
     // deleteProject function - deletes the project with the specified name from _projects array
-    function deleteProject(projectName) {
-        const index = _getProjectIndexFromName(projectName);
+    function deleteProject(projectId) {
+        const index = _getProjectIndexFromId(projectId);
 
         // Return out if last project is attempted to be deleted
         if (_projects.length === 1) {
@@ -159,7 +129,7 @@ const app = (function() {
         
         // If the deleted project is the active project, set the active project to the first item in the projects list
         let activeProjectDeleted;
-        if (_activeProject.name === projectName) {
+        if (_activeProject.id === projectId) {
             activeProjectDeleted = true;
         }
 
@@ -167,8 +137,8 @@ const app = (function() {
 
         // Set a new active project if the active project was deleted
         if (activeProjectDeleted) {
-            const newActiveProjectName = _projects[0].name;
-            changeActiveProject(newActiveProjectName);
+            const newActiveProjectId = _projects[0].id;
+            changeActiveProject(newActiveProjectId);
         } else {
             pubSub.publish('projectsChange', _getStateData());
         }
@@ -204,8 +174,8 @@ const app = (function() {
     }
 
     // changeActiveTodo function - changes the active todo item for the current project
-    function changeActiveTodo(todoTitle) {
-        _activeProject.setActiveTodo(todoTitle);
+    function changeActiveTodo(todoId) {
+        _activeProject.setActiveTodo(todoId);
         pubSub.publish('todosChange', _getStateData());
     }
 
@@ -226,11 +196,11 @@ const app = (function() {
         // Convert localStorage projects array to objects with prototype methods using factory functions
         projects.forEach(projectObj => {
             // Create a new project
-            const newProject = project(projectObj.name);
+            const newProject = project(projectObj.name, projectObj.id);
 
             // Add each todo to the corresponding project
             projectObj.todos.forEach(item => {
-                const todoItem = todo(item.title, item.description, item.dueDate, item.priority, item.complete);
+                const todoItem = todo(item.title, item.description, item.dueDate, item.priority, item.id, item.complete);
                 newProject.addTodo(todoItem);
             });
 

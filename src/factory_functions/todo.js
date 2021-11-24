@@ -26,14 +26,14 @@ const todoProto = {
 };
 
 // todo factory function
-function todo(title, description, dueDate, priority, complete=false) {
+function todo(title, description, dueDate, priority, id, complete=false) {
     return Object.assign(Object.create(todoProto), {
         title,
         description,
         dueDate,
         priority,
         complete,
-        id: uniqid()
+        id: id ? id : uniqid()
     });
 }
 

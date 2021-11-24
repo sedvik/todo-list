@@ -33,7 +33,8 @@ function createInactiveTodoDiv(todo) {
     const container = domUtil.create('div', '', {
         class: classList,
         attributes: {
-            'data-title': todo.title
+            'data-title': todo.title,
+            'data-id': todo.id
         }
     });
 
@@ -55,7 +56,8 @@ function createActiveTodoDiv(todo) {
     const container = domUtil.create('div', '', {
         class: classList,
         attributes: {
-            'data-title': todo.title
+            'data-title': todo.title,
+            'data-id': todo.id
         }
     });
 
@@ -99,7 +101,7 @@ function createTodoListItems(todos, activeTodo) {
     // Children
     todos.forEach(todo => {
         let todoDiv;
-        if (activeTodo === null || todo.title != activeTodo.title) {
+        if (activeTodo === null || todo.id !== activeTodo.id) {
             todoDiv = createInactiveTodoDiv(todo);
         } else {
             todoDiv = createActiveTodoDiv(todo);

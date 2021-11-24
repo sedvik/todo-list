@@ -31,15 +31,17 @@ const events = (function() {
 
     // _selectProject function - Sets the active project
     function _selectProject(e) {
-        const projectName = e.target.parentNode.getAttribute('data-name');
-        app.changeActiveProject(projectName);
+        const projectId = e.target.parentNode.getAttribute('data-id');
+        app.changeActiveProject(projectId);
     }
 
     // _deleteProject function - Deletes the selected project
     function _deleteProject(e) {
-        const projectName = e.target.parentNode.getAttribute('data-name');
+        const parentNode = e.target.parentNode;
+        const projectName = parentNode.getAttribute('data-name');
+        const projectId = parentNode.getAttribute('data-id');
         if (window.confirm(`Are you sure you want to delete the ${projectName} project?`)) {
-            app.deleteProject(projectName);
+            app.deleteProject(projectId);
         }
     }
 
@@ -72,8 +74,8 @@ const events = (function() {
 
     // _setActiveTodo function - Sets an inactive todo to active
     function _setActiveTodo(e) {
-        const todoTitle = e.target.getAttribute('data-title');
-        app.changeActiveTodo(todoTitle);
+        const todoId = e.target.getAttribute('data-id');
+        app.changeActiveTodo(todoId);
     }
 
     // _toggleTodoComplete function - Toggles the active todo's completion status
