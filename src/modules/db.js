@@ -6,7 +6,8 @@ import {
   setDoc,
   collection,
   query,
-  getDocs
+  getDocs,
+  deleteDoc
 } from '@firebase/firestore'
 import { pubSub } from './pubSub';
 
@@ -76,8 +77,8 @@ async function load() {
   return await Promise.all(projects);
 }
 
-// getProject asynchrously returns a project and all of its associated information from the firestore
-async function getProject (uid, projectData) {
+// getProject asynchronously returns a project and all of its associated information from the firestore
+async function getProject(uid, projectData) {
   const project = {
     activeTodo: null,
     id: projectData.id,
@@ -97,11 +98,65 @@ async function getProject (uid, projectData) {
   return project;
 }
 
+// deleteProject asynchronously deletes a project from the firestore
+async function deleteProject(projectData) {
+  // Extract project id
+  const projectId = projectData.projectId;
+
+  // Determine current user id
+  const auth = getAuth(firebaseApp);
+
+  // Return from the function if a user has not logged in
+  if (auth.currentUser === null) {
+    return;
+  }
+
+  const uid = auth.currentUser.uid;
+
+  // Retrieve all todos in project sub-collection and delete them
+  const todosQuery = query(collection(firestore, `users/${uid}/projects/${projectId}/todos`));
+  const todosQuerySnapshot = await getDocs(todosQuery);
+  const todoIds = todosQuerySnapshot.docs.map(doc => doc.id);
+  todoIds.forEach(todoId => {
+    const todoData = {
+      projectId: projectId,
+      todoId: todoId
+    };
+    deleteTodo(todoData)
+  });
+
+  // Delete the project document itself
+  const projectRef = doc(firestore, `users/${uid}/projects/${projectId}`);
+  deleteDoc(projectRef);
+}
+
+// deleteTodo asynchronously deletes a todo from the firestore
+async function deleteTodo(todoData) {
+  // Extract project and todo id
+  const { projectId, todoId } = todoData;
+
+  // Determine current user id
+  const auth = getAuth(firebaseApp);
+  
+  // Return from the function if a user has not logged in
+  if (auth.currentUser === null) {
+    return;
+  }
+
+  const uid = auth.currentUser.uid;
+
+  // Delete doc from firestore
+  const docRef = doc(firestore, `users/${uid}/projects/${projectId}/todos/${todoId}`);
+  await deleteDoc(docRef);
+}
+
 // Initialize pubsub subscriptions to automatically save to db on update of relevant data
 function init() {
   pubSub.subscribe('projectsChange', save);
   pubSub.subscribe('todosChange', save)
   pubSub.subscribe('activeProjectChange', save);
+  pubSub.subscribe('projectDelete', deleteProject);
+  pubSub.subscribe('todoDelete', deleteTodo);
 }
 
 const db = {

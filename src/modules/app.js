@@ -42,28 +42,12 @@ const app = (function() {
         };
     }
 
-    // _getProjectFromName function - obtains the project object with a matching project name
-    function _getProjectFromName(projectName) {
-        const project = _projects.find(project => {
-            return project.name === projectName;
-        });
-        return project;
-    }
-
     // _getProjectFromId function - obtains the project object with a matching project id
     function _getProjectFromId(projectId) {
         const project = _projects.find(project => {
             return project.id === projectId;
         });
         return project;
-    }
-
-    // _getProjectIndexFromName - obtains the index of the project with the specified name within the _projects array
-    function _getProjectIndexFromName(projectName) {
-        const index = _projects.findIndex(project => {
-            return project.name === projectName;
-        });
-        return index;
     }
 
     // _getProjectIndexFromId - obtains the index of the project with the specified id within the _projects array
@@ -117,7 +101,7 @@ const app = (function() {
         pubSub.publish('projectsChange', _getStateData());
     }
 
-    // deleteProject function - deletes the project with the specified name from _projects array
+    // deleteProject function - deletes the project with the specified id from _projects array
     function deleteProject(projectId) {
         const index = _getProjectIndexFromId(projectId);
 
@@ -126,6 +110,12 @@ const app = (function() {
             pubSub.publish('invalidProjectDeletion', 'Projects list cannnot be empty');
             return;
         }
+
+        // Publish message marking project for deletion
+        const projectData = {
+            projectId
+        };
+        pubSub.publish('projectDelete', projectData);
         
         // If the deleted project is the active project, set the active project to the first item in the projects list
         let activeProjectDeleted;
@@ -181,7 +171,16 @@ const app = (function() {
 
     // deleteTodo function - deletes the active todo item from the activeProject
     function deleteActiveTodo() {
+        // Extract id data from todo that is to be deleted
+        const todoData = {
+            projectId: _activeProject.id,
+            todoId: _activeProject.activeTodo.id
+        };
+        
+        // Delete active todo from ui
         _activeProject.deleteActiveTodo();
+
+        pubSub.publish('todoDelete', todoData);
         pubSub.publish('todosChange', _getStateData());
     }
 
