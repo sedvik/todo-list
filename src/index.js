@@ -1,6 +1,5 @@
 import { viewController } from './modules/viewController.js';
 import { events } from './modules/events.js';
-import { storage } from './modules/storage.js';
 import { app } from './modules/app.js';
 import { db } from './modules/db.js';
 import { firebaseApp } from './modules/firebase.js';
@@ -11,7 +10,6 @@ import './css/style.css';
 // Initialize viewController, events, and storage modules
 viewController.init();
 events.init();
-storage.init();
 db.init();
 
 // Setup authentication state listener to either load default projects or firestore data, depending on user authentication state.
