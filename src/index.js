@@ -7,12 +7,12 @@ import { onAuthStateChanged, getAuth } from '@firebase/auth';
 import './css/reset.css';
 import './css/style.css';
 
-// Initialize viewController, events, and storage modules
+// Initialize viewController, events, and db modules
 viewController.init();
 events.init();
 db.init();
 
-// Setup authentication state listener to either load default projects or firestore data, depending on user authentication state.
+// Setup authentication state listener to either load default projects or firestore project data, depending on user authentication state.
 onAuthStateChanged(getAuth(firebaseApp), async (user) => {
   let projects;
 

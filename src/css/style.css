@@ -32,6 +32,7 @@ header .profile-info {
     margin-right: 6rem;
     border: 1px solid black;
     border-radius: 5px;
+    background-color: rgb(247, 243, 215);
 }
 
 #login-btn,
