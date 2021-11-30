@@ -4,15 +4,6 @@ import { app } from './app.js';
 // Events module - coordinates event addition/modification to dom nodes
 const events = (function() {
     /* Event handler functions */
-    // _login function - Logs user into application
-    function _login() {
-
-    }
-
-    // _logout function - Logs user out of application
-    function _logout() {
-
-    }
     
     // _createNewProject function - Creates a new project
     function _createNewProject() {

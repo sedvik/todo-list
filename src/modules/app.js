@@ -1,4 +1,3 @@
-// import { initializeApp, getApp } from '@firebase/app';
 import { firebaseApp } from './firebase.js';
 import { 
     getAuth,
