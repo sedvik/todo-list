@@ -43,6 +43,12 @@ async function saveProject(project, uid) {
 // save function, saves data to firestore
 function save(data) {
   const auth = getAuth(firebaseApp);
+  
+  // Return from the function if a user has not logged in
+  if (auth.currentUser === null) {
+    return;
+  }
+
   const uid = auth.currentUser.uid;
 
   // Extract projects from data parameter

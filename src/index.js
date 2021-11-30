@@ -8,27 +8,27 @@ import { onAuthStateChanged, getAuth } from '@firebase/auth';
 import './css/reset.css';
 import './css/style.css';
 
-// Retrieve projects from localStorage
-const projects = storage.load();
-console.log(projects);
-
-onAuthStateChanged(getAuth(firebaseApp), async (user) => {
-  const projects = await db.load()
-  console.log(projects);
-  app.init(projects);
-});
-
-// setTimeout(async () => {
-//   const projects = await db.load();
-//   // console.log(projects);
-//   app.init(projects);
-// }, 500);
-
 // Initialize viewController, events, and storage modules
 viewController.init();
 events.init();
 storage.init();
 db.init();
 
-// Initialize application
-// app.init(projects);
+// Setup authentication state listener to either load default projects or firestore data, depending on user authentication state.
+onAuthStateChanged(getAuth(firebaseApp), async (user) => {
+  let projects;
+
+  // If a user is not signed in, load default app projects. Otherwise retrieve them from the firestore using the db module.
+  if (user === null) {
+    projects = [
+      {
+        name: 'Project 1',
+        todos: []
+      }
+    ];
+  } else {
+    projects = await db.load();
+  }
+
+  app.init(projects);
+});

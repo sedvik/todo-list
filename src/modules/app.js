@@ -191,9 +191,12 @@ const app = (function() {
         pubSub.publish('todosChange', _getStateData());
     }
 
-    // init function - initializes the application with the given projects array from localStorage
+    // init function - initializes the application with the given projects array
     function init(projects) {
-        // Convert localStorage projects array to objects with prototype methods using factory functions
+        // Initialize the projects array
+        _projects = [];
+        
+        // Convert projects array to objects with project prototype methods using factory functions
         projects.forEach(projectObj => {
             // Create a new project
             const newProject = project(projectObj.name, projectObj.id);
