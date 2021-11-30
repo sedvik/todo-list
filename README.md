@@ -8,10 +8,12 @@ This todo list application has the following features:
 3. Created todo cards within a project are highlighted with green, yellow, or red corresponding to the priority levels of low, mid, and high.
 4. Todos may be clicked on so that edits can be made. To save todo edits, the save button must be clicked.
 5. Once a todo is expanded, the checkbox in the upper-left corner can be clicked to toggle todo completion.
-6. Project and todo data persist across site visits through the use of browser local storage.
+6. Users may log into the application with Google by clicking the "Login" button in the header
+7. If a user has logged into the application using Google, project and todo data persist across site visits through the use of Firebase Firestore
 
 This application was created to practice the following:
 
 1. Single-responsibility OOP principle. For example, individual module files in the /src/modules folder each have a distinct job and are not tightly coupled together as in previous projects.
 2. Using factory functions for projects and todos, which included placing methods within their respective prototypes.
-2. In order to loosely-couple different modules, a simple publish-subscribe module was introduced.  
+3. In order to loosely-couple different modules, a simple publish-subscribe module was introduced.  
+4. Firebase backend functionality including authentication and storage using Firestore
